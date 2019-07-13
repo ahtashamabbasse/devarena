@@ -39,5 +39,27 @@ class UserController {
         });
     }
 
+    login(req,res){
+        const email=req.body.email;
+        const password=req.body.password;
+
+        User.findOne({email})
+            .then(user=>{
+                if (!user){
+                    res.status(404).json({'email':'Emails is not Exist'});
+                } else{
+                    bcrypt.compare(password,user.password)
+                        .then(isMatched=>{
+                            if (isMatched){
+                                res.status(200).json({"status":"Success"})
+                            } else {
+                                res.status(400).json({"password":"Password is not correct"})
+                            }
+                        })
+                }
+            })
+
+    }
+
 }
 module.exports=UserController
