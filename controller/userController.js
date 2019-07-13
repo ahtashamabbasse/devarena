@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/keys');
 
 
+// import register validator
+const validateRegisterInput=require('../validation/register')
+
 class UserController {
 
     /**
@@ -26,6 +29,13 @@ class UserController {
      */
 
     register(req, res) {
+
+        const {errors,isValid} =validateRegisterInput(req.body);
+        // check validation
+        if (!isValid){
+            return res.status(400).json(errors)
+        }
+
         User.findOne({email: req.body.email}).then(user => {
             if (user) {
                 return res.status(400).json({"email": "Email is already exist"});
