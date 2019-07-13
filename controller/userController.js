@@ -1,6 +1,10 @@
-const User=require('../models/User')
+const User = require('../models/User')
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const config = require('../config/keys');
+
+
 class UserController {
 
     /**
@@ -9,9 +13,9 @@ class UserController {
      * @param res
      * Get all users
      */
-    getAllUsers(req,res){
-        User.findOne().then(user=>{
-            res.json({"user":user})
+    getAllUsers(req, res) {
+        User.findOne().then(user => {
+            res.json({"user": user})
         })
     }
 
@@ -22,10 +26,10 @@ class UserController {
      * Register new user and check is email is unique
      */
 
-    register(req,res){
-        User.findOne({ email: req.body.email }).then(user => {
+    register(req, res) {
+        User.findOne({email: req.body.email}).then(user => {
             if (user) {
-                return res.status(400).json({"email":"Email is already exist"});
+                return res.status(400).json({"email": "Email is already exist"});
             } else {
                 const avatar = gravatar.url(req.body.email, {
                     s: '200', // Size
@@ -60,21 +64,35 @@ class UserController {
      * @param res
      * Authenticate the user after verifying their credentials
      */
-    login(req,res){
-        const email=req.body.email;
-        const password=req.body.password;
+    login(req, res) {
+        const email = req.body.email;
+        const password = req.body.password;
 
         User.findOne({email})
-            .then(user=>{
-                if (!user){
-                    res.status(404).json({'email':'Emails is not Exist'});
-                } else{
-                    bcrypt.compare(password,user.password)
-                        .then(isMatched=>{
-                            if (isMatched){
-                                res.status(200).json({"status":"Success"})
+            .then(user => {
+                if (!user) {
+                    res.status(404).json({'email': 'Emails is not Exist'});
+                } else {
+                    bcrypt.compare(password, user.password)
+                        .then(isMatched => {
+                            if (isMatched) {
+
+                                //user is matched
+                                const payLoad = {id: user.id, name: user.name, avatar: user.avatar}; //JWT creation payload
+                                jwt.sign(
+                                    payLoad,
+                                    config.secretOrKey,
+                                    {expiresIn: 3600},
+                                    (err,token) => {
+                                        res.status(200).json({
+                                            success:true,
+                                            token:"Bearer "+token
+                                        })
+                                    }
+                                );
+                                //res.status(200).json({"status": "Success"})
                             } else {
-                                res.status(400).json({"password":"Password is not correct"})
+                                res.status(400).json({"password": "Password is not correct"})
                             }
                         })
                 }
@@ -83,4 +101,5 @@ class UserController {
     }
 
 }
-module.exports=UserController
+
+module.exports = UserController
