@@ -5,6 +5,11 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/keys');
 
 
+// import register validator
+const validateRegisterInput=require('../validation/register');
+const validateLoginInput=require('../validation/login');
+
+
 class UserController {
 
     /**
@@ -14,9 +19,8 @@ class UserController {
      * Get all users
      */
     getAllUsers(req, res) {
-        User.findOne().then(user => {
-            res.json({"user": user})
-        })
+        console.log("data is here ",req.user);
+        res.json({'status':"success",})
     }
 
     /**
@@ -27,9 +31,17 @@ class UserController {
      */
 
     register(req, res) {
+
+        const {errors,isValid} =validateRegisterInput(req.body);
+        // check validation
+        if (!isValid){
+            return res.status(400).json(errors)
+        }
+
         User.findOne({email: req.body.email}).then(user => {
             if (user) {
-                return res.status(400).json({"email": "Email is already exist"});
+                errors.email="Email is already exist";
+                return res.status(400).json(errors);
             } else {
                 const avatar = gravatar.url(req.body.email, {
                     s: '200', // Size
@@ -68,10 +80,18 @@ class UserController {
         const email = req.body.email;
         const password = req.body.password;
 
+        const {errors,isValid} =validateLoginInput(req.body);
+        // check validation
+        if (!isValid){
+            return res.status(400).json(errors)
+        }
+
+
         User.findOne({email})
             .then(user => {
                 if (!user) {
-                    res.status(404).json({'email': 'Emails is not Exist'});
+                    errors.email= 'Emails is not Exist';
+                    res.status(404).json(errors);
                 } else {
                     bcrypt.compare(password, user.password)
                         .then(isMatched => {
@@ -90,9 +110,9 @@ class UserController {
                                         })
                                     }
                                 );
-                                //res.status(200).json({"status": "Success"})
                             } else {
-                                res.status(400).json({"password": "Password is not correct"})
+                                errors.password="Password is not correct";
+                                res.status(400).json(errors)
                             }
                         })
                 }

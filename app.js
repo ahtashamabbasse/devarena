@@ -3,12 +3,14 @@ let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
+let passport=require('passport')
 
-
+// Route import
 let profileRouter = require('./routes/api/profile');
 let usersRouter = require('./routes/api/users');
 let postRouter = require('./routes/api/posts');
 
+// Database configuration import
 const config = require('./config/keys');
 const mongoose = require("mongoose");
 
@@ -19,8 +21,13 @@ mongoose
     .catch(err => console.log(err));
 
 
-
 let app = express();
+
+
+// Initialize Passport
+app.use(passport.initialize())
+require('./config/passport')(passport)
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
