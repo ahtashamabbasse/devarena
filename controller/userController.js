@@ -6,7 +6,9 @@ const config = require('../config/keys');
 
 
 // import register validator
-const validateRegisterInput=require('../validation/register')
+const validateRegisterInput=require('../validation/register');
+const validateLoginInput=require('../validation/login');
+
 
 class UserController {
 
@@ -76,6 +78,13 @@ class UserController {
     login(req, res) {
         const email = req.body.email;
         const password = req.body.password;
+
+        const {errors,isValid} =validateLoginInput(req.body);
+        // check validation
+        if (!isValid){
+            return res.status(400).json(errors)
+        }
+
 
         User.findOne({email})
             .then(user => {
