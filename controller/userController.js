@@ -14,9 +14,8 @@ class UserController {
      * Get all users
      */
     getAllUsers(req, res) {
-        User.findOne().then(user => {
-            res.json({"user": user})
-        })
+        console.log("data is here ",req.user);
+        res.json({'status':"success",})
     }
 
     /**
