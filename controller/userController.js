@@ -110,9 +110,9 @@ class UserController {
                                         })
                                     }
                                 );
-                                //res.status(200).json({"status": "Success"})
                             } else {
-                                res.status(400).json({"password": "Password is not correct"})
+                                errors.password="Password is not correct";
+                                res.status(400).json(errors)
                             }
                         })
                 }
