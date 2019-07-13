@@ -2,11 +2,26 @@ const User=require('../models/User')
 const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 class UserController {
+
+    /**
+     * @Route Public /api/users
+     * @param req
+     * @param res
+     * Get all users
+     */
     getAllUsers(req,res){
         User.findOne().then(user=>{
             res.json({"user":user})
         })
     }
+
+    /**
+     * @Route Public /api/users/register
+     * @param req
+     * @param res
+     * Register new user and check is email is unique
+     */
+
     register(req,res){
         User.findOne({ email: req.body.email }).then(user => {
             if (user) {
@@ -39,6 +54,12 @@ class UserController {
         });
     }
 
+    /**
+     * @Route Public /api/users/login
+     * @param req
+     * @param res
+     * Authenticate the user after verifying their credentials
+     */
     login(req,res){
         const email=req.body.email;
         const password=req.body.password;
