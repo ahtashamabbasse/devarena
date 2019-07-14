@@ -25,26 +25,28 @@ const PostSchema = new Schema({
             },
         }
     ],
-    comments: {
-        user: {
-            type: Schema.Types.ObjectId,
-            ref: "users"
-        },
-        text: {
-            type: String,
-        },
-        name: {
-            type: String,
-        },
-        avatar: {
-            type: String,
-        },
-        date: {
-            type: String,
-            default: Date.now
-        },
+    comments: [
+        {
+            user: {
+                type: Schema.Types.ObjectId,
+                ref: "users"
+            },
+            text: {
+                type: String,
+            },
+            name: {
+                type: String,
+            },
+            avatar: {
+                type: String,
+            },
+            date: {
+                type: String,
+                default: Date.now
+            },
 
-    },
+        }
+    ],
     date: {
         type: String,
         default: Date.now

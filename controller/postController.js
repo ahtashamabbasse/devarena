@@ -7,8 +7,18 @@ const validatePostInput = require('../validation/Post');
 
 class PostController {
 
+    /**
+     * @route Public /api/posts
+     * @method GET
+     * @param req
+     * @param res
+     * @description Get all post
+     */
     getAllPosts(req,res){
-        res.json({"status":"Data coming from post controller"})
+        Post.find()
+            .sort({date:-1})
+            .then(posts=>res.status(200).json(posts))
+            .catch(err=>res.status(500).json(err))
     }
 
     /**
