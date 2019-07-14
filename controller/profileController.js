@@ -200,6 +200,35 @@ class ProfileController {
             .catch(err => res.status(400).json(err))
     }
 
+    /**
+     * @route /api/profile/education
+     * @method POST
+     * @param req
+     * @param res
+     * @access private
+     * @description Save user experience
+     */
+    education(req, res) {
+
+
+        Profile.findOne({user: req.user.id})
+            .then(profile => {
+                const newEdu = {
+                    institute: req.body.institute,
+                    degree: req.body.degree,
+                    fieldOfStudy: req.body.fieldOfStudy,
+                    from: req.body.from,
+                    to: req.body.to,
+                    current: req.body.current,
+                    description: req.body.description,
+                };
+                profile.education.unshift(newEdu);
+                profile.save()
+                    .then(profile=>res.status(200).json(profile))
+            })
+            .catch(err => res.status(400).json(err))
+    }
+
 
 }
 
