@@ -77,6 +77,25 @@ class PostController {
             })
             .catch(err=>res.status(404).json({nopost:"No post found with this id"}))
     }
+    /**
+     * @route Public /api/posts/likes/:id
+     * @method POST
+     * @param req
+     * @param res
+     * @description User can like post if haven't like yet
+     */
+    saveLike(req,res){
+        Post.findById(req.params.id)
+            .then(post=>{
+                if (post.likes.filter(like=>like.user.toString()===req.user.id).length>0){
+                    return res.status(401).json({'alreadyLiked':"This post has been already liked"})
+                }
+                post.likes.unshift({user:req.user.id});
+                post.save()
+                    .then(post=>res.json(post))
+            })
+            .catch(err=>res.status(404).json({nopost:"No post found"}))
+    }
 
 
 }
