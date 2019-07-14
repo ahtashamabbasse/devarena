@@ -1,8 +1,14 @@
 const Profile = require('../models/Profile');
+
+// import profile validator
+const validateProfileInput=require('../validation/profile');
+
+
 class ProfileController {
     getProfile(req,res){
         let errors={};
         Profile.findOne({user:req.user.id})
+            .populate('user',['name','avatar'])
             .then(profile=>{
                 if (!profile){
                     errors.noprofile="No Profile Found";
@@ -15,6 +21,13 @@ class ProfileController {
             })
     }
     updateProfile(req,res){
+
+        const {errors,isValid} =validateProfileInput(req.body);
+        // check validation
+        if (!isValid){
+            return res.status(400).json(errors)
+        }
+
         const profileFields={};
         profileFields.user=req.user.id;
         
