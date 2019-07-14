@@ -124,7 +124,7 @@ class ProfileController {
      * @param req
      * @param res
      * @access public
-     * @description Get profile through handle
+     * @description Get profile through user id
      */
     getProfileById(req, res) {
         let error={};
@@ -146,7 +146,7 @@ class ProfileController {
      * @param req
      * @param res
      * @access public
-     * @description Get profile through handle
+     * @description Get all profiles
      */
     getallProfiles(req, res) {
         let error={};
