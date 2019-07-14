@@ -235,6 +235,33 @@ class ProfileController {
             .catch(err => res.status(400).json(err))
     }
 
+    /**
+     * @route /api/profile/education
+     * @method POST
+     * @param req
+     * @param res
+     * @access private
+     * @description Save user experience
+     */
+    deleteExperience(req, res) {
+        Profile.findOne({user: req.user.id})
+            .then(profile => {
+
+                const removeIndex=profile.experience
+                    .map(item=>item._id)
+                    .indexOf(req.params.exp_id);
+                console.log(removeIndex);
+
+                profile.experience.splice(removeIndex,1);
+
+                console.log(profile.experience.length);
+
+                profile.save()
+                    .then(profile=>res.status(200).json(profile))
+            })
+            .catch(err => res.status(400).json(err))
+    }
+
 
 }
 
