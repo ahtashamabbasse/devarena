@@ -2,6 +2,8 @@ const Profile = require('../models/Profile');
 
 // import profile validator
 const validateProfileInput = require('../validation/profile');
+const validateExperienceInput = require('../validation/experience');
+
 
 
 class ProfileController {
@@ -172,11 +174,15 @@ class ProfileController {
      * @description Save user experience
      */
     experience(req, res) {
-        let errors = {};
-        console.log(req.user)
+
+        const {errors, isValid} = validateExperienceInput(req.body);
+        // check validation
+        if (!isValid) {
+            return res.status(400).json(errors)
+        }
+
         Profile.findOne({user: req.user.id})
             .then(profile => {
-                console.log(profile)
                 const newExp = {
                     title: req.body.title,
                     company: req.body.company,
