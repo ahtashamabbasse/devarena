@@ -106,9 +106,9 @@ class ProfileController {
      * @description Get profile through handle
      */
     getProfileByHandle(req, res) {
-        let error={}
+        let error = {}
         Profile.findOne({handle: req.params.handle})
-            .populate('user',['name','avatar'])
+            .populate('user', ['name', 'avatar'])
             .then(profile => {
                 if (!profile) {
                     error.noprofile = "There is no profile for this user";
@@ -116,8 +116,9 @@ class ProfileController {
                 }
                 return res.status(200).json(profile)
             })
-            .catch(err=>res.status(400).json(err))
+            .catch(err => res.status(400).json(err))
     }
+
     /**
      * @route /api/profile/user/:id
      * @method GET
@@ -127,9 +128,9 @@ class ProfileController {
      * @description Get profile through user id
      */
     getProfileById(req, res) {
-        let error={};
+        let error = {};
         Profile.findOne({user: req.params.id})
-            .populate('user',['name','avatar'])
+            .populate('user', ['name', 'avatar'])
             .then(profile => {
                 if (!profile) {
                     error.noprofile = "There is no profile for this user";
@@ -137,7 +138,7 @@ class ProfileController {
                 }
                 return res.status(200).json(profile)
             })
-            .catch(err=>res.status(400).json(err))
+            .catch(err => res.status(400).json(err))
     }
 
     /**
@@ -149,9 +150,9 @@ class ProfileController {
      * @description Get all profiles
      */
     getallProfiles(req, res) {
-        let error={};
+        let error = {};
         Profile.find()
-            .populate('user',['name','avatar'])
+            .populate('user', ['name', 'avatar'])
             .then(profile => {
                 if (!profile) {
                     error.noprofile = "There are no profiles";
@@ -159,7 +160,38 @@ class ProfileController {
                 }
                 return res.status(200).json(profile)
             })
-            .catch(err=>res.status(400).json(err))
+            .catch(err => res.status(400).json(err))
+    }
+
+    /**
+     * @route /api/profile/experience
+     * @method POST
+     * @param req
+     * @param res
+     * @access private
+     * @description Save user experience
+     */
+    experience(req, res) {
+        let errors = {};
+        console.log(req.user)
+        Profile.findOne({user: req.user.id})
+            .then(profile => {
+                console.log(profile)
+                const newExp = {
+                    title: req.body.title,
+                    company: req.body.company,
+                    location: req.body.location,
+                    from: req.body.from,
+                    to: req.body.to,
+                    current: req.body.current,
+                    description: req.body.description,
+                };
+                profile.experience.unshift(newExp);
+                profile.save()
+                    .then(profile=>res.status(200).json(profile))
+
+            })
+            .catch(err => res.status(400).json(err))
     }
 
 
