@@ -16,5 +16,8 @@ router.get('/:id', post.getPostById);
 router.post('/likes/:id',passport.authenticate('jwt', {session: false}), post.saveLike);
 router.post('/unlikes/:id',passport.authenticate('jwt', {session: false}), post.saveunLike);
 
+// Comments
+router.post('/comment/:post_id',passport.authenticate('jwt', {session: false}), post.saveComment);
+
 
 module.exports = router;
