@@ -1,5 +1,6 @@
 const Post = require('../models/Post');
-const User = require('../models/User');
+
+const validatePostInput = require('../validation/Post');
 
 
 
@@ -18,6 +19,11 @@ class PostController {
      * @description Create new post
      */
     savePost(req,res){
+
+        const {errors,isValid}=validatePostInput(req.body);
+        if (!isValid) {
+            return res.status(400).json(errors)
+        }
 
         const newPost=new Post({
             text:req.body.text,
