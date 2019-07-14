@@ -9,6 +9,10 @@ const profile=new profileController();
 
 router.get('/',passport.authenticate('jwt', {session: false}), profile.getProfile);
 router.post('/',passport.authenticate('jwt', {session: false}), profile.updateProfile);
+router.get('/handle/:handle', profile.getProfileByHandle);
+router.get('/user/:id', profile.getProfileById);
+
+
 
 
 module.exports = router;
