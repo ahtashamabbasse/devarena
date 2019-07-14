@@ -6,7 +6,7 @@ const user = new userController();
 const passpor = require('passport')
 
 
-router.get('/', passpor.authenticate('jwt', {session: false}), user.getAllUsers);
+router.get('/current', passpor.authenticate('jwt', {session: false}), user.current);
 router.post('/register', user.register);
 router.post('/login', user.login);
 

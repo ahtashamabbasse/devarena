@@ -18,7 +18,7 @@ class UserController {
      * @param res
      * Get all users
      */
-    getAllUsers(req, res) {
+    current(req, res) {
         console.log("data is here ",req.user);
         res.json({'status':"success",})
     }
