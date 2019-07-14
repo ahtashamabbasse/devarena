@@ -14,5 +14,7 @@ router.get('/:id', post.getPostById);
 
 // Likes
 router.post('/likes/:id',passport.authenticate('jwt', {session: false}), post.saveLike);
+router.post('/unlikes/:id',passport.authenticate('jwt', {session: false}), post.saveunLike);
+
 
 module.exports = router;

@@ -88,9 +88,34 @@ class PostController {
         Post.findById(req.params.id)
             .then(post=>{
                 if (post.likes.filter(like=>like.user.toString()===req.user.id).length>0){
-                    return res.status(401).json({'alreadyLiked':"This post has been already liked"})
+                    return res.status(400).json({'alreadyLiked':"This post has been already liked"})
                 }
                 post.likes.unshift({user:req.user.id});
+                post.save()
+                    .then(post=>res.json(post))
+            })
+            .catch(err=>res.status(404).json({nopost:"No post found"}))
+    }
+
+    /**
+     * @route Public /api/posts/unlikes/:id
+     * @method POST
+     * @param req
+     * @param res
+     * @description User can unlike post if already liked
+     */
+    saveunLike(req,res){
+        Post.findById(req.params.id)
+            .then(post=>{
+                if (post.likes.filter(like=>like.user.toString()===req.user.id).length===0){
+                    return res.status(400).json({'noliked':"You have not liked yet"})
+                }
+
+                const removeIndex=post.likes
+                    .map(item=>item.user.toString())
+                    .indexOf(req.user.id)
+
+                post.likes.splice(removeIndex,1);
                 post.save()
                     .then(post=>res.json(post))
             })
