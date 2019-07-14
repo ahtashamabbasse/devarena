@@ -18,6 +18,7 @@ router.post('/unlikes/:id',passport.authenticate('jwt', {session: false}), post.
 
 // Comments
 router.post('/comment/:post_id',passport.authenticate('jwt', {session: false}), post.saveComment);
+router.delete('/comment/:post_id/:comment_id',passport.authenticate('jwt', {session: false}), post.deleteComment);
 
 
 module.exports = router;

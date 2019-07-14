@@ -1,6 +1,8 @@
 const Post = require('../models/Post');
 
 const validatePostInput = require('../validation/Post');
+const validateCommentInput = require('../validation/comment');
+
 
 
 class PostController {
@@ -131,6 +133,12 @@ class PostController {
      * @description User can unlike post if already liked
      */
     saveComment(req, res) {
+
+        const {errors, isValid} = validateCommentInput(req.body);
+        if (!isValid) {
+            return res.status(400).json(errors)
+        }
+
         Post.findById(req.params.post_id)
             .then(post => {
                 const newComment = {
@@ -145,6 +153,33 @@ class PostController {
             })
             .catch(err => res.status(404).json({nopost: "No post found"}))
     }
+
+    /**
+     * @route Public /api/posts/comment/:post_id/:comment_id
+     * @method POST
+     * @param req
+     * @param res
+     * @description User can unlike post if already liked
+     */
+    deleteComment(req, res) {
+        Post.findById(req.params.post_id)
+            .then(post => {
+                const isCommentExist = post.comments.filter(comment => comment._id.toString() === req.params.comment_id).length === 0;
+                if (isCommentExist) {
+                    return res.status(400).json({'noliked': "Comment doesn't exist"})
+                }
+
+                const removeIndex = post.comments
+                    .map(item => item._id.toString())
+                    .indexOf(req.params.comment_id);
+
+                post.comments.splice(removeIndex, 1);
+                post.save()
+                    .then(post => res.json(post))
+            })
+            .catch(err => res.status(404).json({nopost: "No post found"}))
+    }
+
 
 
 }
