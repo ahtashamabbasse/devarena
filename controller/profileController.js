@@ -3,6 +3,8 @@ const Profile = require('../models/Profile');
 // import profile validator
 const validateProfileInput = require('../validation/profile');
 const validateExperienceInput = require('../validation/experience');
+const validateEducationInput = require('../validation/education');
+
 
 
 
@@ -210,7 +212,11 @@ class ProfileController {
      */
     education(req, res) {
 
-
+        const {errors, isValid} = validateEducationInput(req.body);
+        // check validation
+        if (!isValid) {
+            return res.status(400).json(errors)
+        }
         Profile.findOne({user: req.user.id})
             .then(profile => {
                 const newEdu = {
