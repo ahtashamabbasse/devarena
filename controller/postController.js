@@ -20,6 +20,18 @@ class PostController {
             .then(posts=>res.status(200).json(posts))
             .catch(err=>res.status(500).json(err))
     }
+    /**
+     * @route Public /api/posts/:id
+     * @method GET
+     * @param req
+     * @param res
+     * @description Get post by id
+     */
+    getPostById(req,res){
+        Post.findById(req.params.id)
+            .then(posts=>res.status(200).json(posts))
+            .catch(err=>res.status(404).json({nopost:"No post found with this id"}))
+    }
 
     /**
      * @route private /api/posts
