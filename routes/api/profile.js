@@ -16,6 +16,8 @@ router.post('/experience',passport.authenticate('jwt', {session: false}), profil
 router.post('/education',passport.authenticate('jwt', {session: false}), profile.education);
 router.delete('/experience/:exp_id',passport.authenticate('jwt', {session: false}), profile.deleteExperience);
 router.delete('/education/:edu_id',passport.authenticate('jwt', {session: false}), profile.deleteEducation);
+router.delete('/',passport.authenticate('jwt', {session: false}), profile.deleteUser);
+
 
 
 

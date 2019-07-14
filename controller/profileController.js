@@ -1,4 +1,6 @@
 const Profile = require('../models/Profile');
+const User = require('../models/User');
+
 
 // import profile validator
 const validateProfileInput = require('../validation/profile');
@@ -283,6 +285,25 @@ class ProfileController {
                     .then(profile=>res.status(200).json(profile))
             })
             .catch(err => res.status(400).json(err))
+    }
+
+
+    /**
+     * @route /api/profile/
+     * @method Delete
+     * @param req
+     * @param res
+     * @access private
+     * @description Delete user and profile
+     */
+    deleteUser(req, res) {
+        Profile.findOneAndRemove({user:req.user.id})
+            .then(()=>{
+                User.findOneAndRemove({_id:req.user.id})
+                    .then(()=>{
+                        return res.status(200).json({'status':"Success"})
+                    })
+            })
     }
 
 
