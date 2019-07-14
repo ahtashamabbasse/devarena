@@ -140,6 +140,28 @@ class ProfileController {
             .catch(err=>res.status(400).json(err))
     }
 
+    /**
+     * @route /api/profile/all
+     * @method GET
+     * @param req
+     * @param res
+     * @access public
+     * @description Get profile through handle
+     */
+    getallProfiles(req, res) {
+        let error={};
+        Profile.find()
+            .populate('user',['name','avatar'])
+            .then(profile => {
+                if (!profile) {
+                    error.noprofile = "There are no profiles";
+                    return res.status(400).json(error)
+                }
+                return res.status(200).json(profile)
+            })
+            .catch(err=>res.status(400).json(err))
+    }
+
 
 }
 

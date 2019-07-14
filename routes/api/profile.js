@@ -11,6 +11,8 @@ router.get('/',passport.authenticate('jwt', {session: false}), profile.getProfil
 router.post('/',passport.authenticate('jwt', {session: false}), profile.updateProfile);
 router.get('/handle/:handle', profile.getProfileByHandle);
 router.get('/user/:id', profile.getProfileById);
+router.get('/all', profile.getallProfiles);
+
 
 
 
