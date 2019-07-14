@@ -18,7 +18,7 @@ class PostController {
         Post.find()
             .sort({date:-1})
             .then(posts=>res.status(200).json(posts))
-            .catch(err=>res.status(500).json(err))
+            .catch(err=>res.status(404).json({nopost:"No Posts found"}))
     }
     /**
      * @route Public /api/posts/:id
@@ -58,6 +58,24 @@ class PostController {
                 return res.status(200).json(post)
             })
             .catch(err=>res.status(500).json(err))
+    }
+
+    /**
+     * @route Public /api/posts/:id
+     * @method DELETE
+     * @param req
+     * @param res
+     * @description Delete post if the requested user is owner
+     */
+    deletePost(req,res){
+        Post.findById(req.params.id)
+            .then(post=>{
+                if (post.user.toString()!==req.user.id){
+                    return res.status(401).json({'notauthorized':"User is not Authorized"})
+                }
+                post.remove().then(()=>res.json({'status':"success"}))
+            })
+            .catch(err=>res.status(404).json({nopost:"No post found with this id"}))
     }
 
 

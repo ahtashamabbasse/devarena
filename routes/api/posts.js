@@ -9,6 +9,7 @@ const post=new postController();
 
 router.get('/', post.getAllPosts);
 router.post('/',passport.authenticate('jwt', {session: false}), post.savePost);
+router.delete('/:id',passport.authenticate('jwt', {session: false}), post.deletePost);
 router.get('/:id', post.getPostById);
 
 
