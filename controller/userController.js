@@ -14,7 +14,8 @@ class UserController {
 
     /**
      * @Route Public /api/users
-     * @param req
+     * @method GET
+     *  @param req
      * @param res
      * Get all users
      */
@@ -25,6 +26,7 @@ class UserController {
 
     /**
      * @Route Public /api/users/register
+     * @method POST
      * @param req
      * @param res
      * Register new user and check is email is unique
@@ -72,7 +74,8 @@ class UserController {
 
     /**
      * @Route Public /api/users/login
-     * @param req
+     * @method POST
+     *  @param req
      * @param res
      * Authenticate the user after verifying their credentials
      */

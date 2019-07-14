@@ -5,6 +5,13 @@ const validateProfileInput=require('../validation/profile');
 
 
 class ProfileController {
+    /**
+     * @route private /api/profile
+     * @method GET
+     * @param req
+     * @param res
+     * @description Get logged in user profile
+     */
     getProfile(req,res){
         let errors={};
         Profile.findOne({user:req.user.id})
@@ -20,6 +27,16 @@ class ProfileController {
                 res.status(500).json(err)
             })
     }
+
+    /**
+     * @route /api/profile
+     * @method POST
+     * @param req
+     * @param res
+     * @access private
+     * @description Update or create profile after validating
+     */
+
     updateProfile(req,res){
 
         const {errors,isValid} =validateProfileInput(req.body);
