@@ -6,7 +6,7 @@ const Footer = () => {
             {/*<div className="navbar fixed-bottom">*/}
             {/*    bottom*/}
             {/*</div>*/}
-            <footer className="navbar fixed-bottom bg-dark text-white mt-5 p-4 ">
+            <footer className="navbar  bg-dark text-white mt-5 p-4 ">
                 <p className={'text-center m-auto'}>Copyright &copy; {new Date().getFullYear()} DevArena</p>
             </footer>
         </div>
