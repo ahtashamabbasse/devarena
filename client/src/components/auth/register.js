@@ -22,7 +22,7 @@ class Register extends Component {
             email: this.state.email,
             password: this.state.password,
             cpassword: this.state.cpassword,
-        }
+        };
         console.log(newUser)
 
     };
