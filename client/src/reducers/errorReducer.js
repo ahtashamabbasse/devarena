@@ -1,8 +1,6 @@
 import {GET_ERRORS} from "../actions/types";
 
 const initialState = {
-    isAuthorized: false,
-    user: {}
 };
 
 export default function (state = initialState, action) {

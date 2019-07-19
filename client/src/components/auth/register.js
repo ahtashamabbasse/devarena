@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import classnames from 'classnames'
 import {connect} from "react-redux";
-import {registeruser} from "../../actions/authAction";
+import {registerUser} from "../../actions/authAction";
 import PropsTypes from "prop-types"
 
 const {withRouter} = require("react-router-dom");
@@ -105,10 +105,10 @@ Register.propTypes = {
     errors: PropsTypes.object.isRequired,
 
 
-}
+};
 const mapStateToProps = (state) => ({
     auth: state.auth,
     errors: state.errors
 
 });
-export default connect(mapStateToProps, {registeruser})(withRouter(Register));
+export default connect(mapStateToProps, {registeruser: registerUser})(withRouter(Register));
