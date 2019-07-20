@@ -6,7 +6,6 @@ import {logoutUser} from "../../actions/authAction";
 class Landing extends Component {
 
     componentDidMount() {
-
         if (this.props.auth.isAuthorized){
             this.props.history.push("/dashboard")
         }
