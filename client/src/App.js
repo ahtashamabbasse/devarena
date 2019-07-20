@@ -7,7 +7,7 @@ import {BrowserRouter as Router, Route} from "react-router-dom";
 import {Provider} from 'react-redux'
 import setAuthToken from './utility/setAuthToken'
 import jwt_token from 'jwt-decode'
-import {setCurrentuser} from "./actions/authAction";
+import {logoutUser, setCurrentuser} from "./actions/authAction";
 
 import store from "./store";
 
@@ -15,17 +15,16 @@ import Register from "./components/auth/register";
 import Login from "./components/auth/login";
 
 
-if (localStorage.getItem('jwtToken')){
-    //localStorage.removeItem('jwtToken')
-    // const token=localStorage.getItem('jwtToken');
-    // console.log(token)
-
-    // console.log(token);
-    //setAuthToken(token);
-    // const decoded=jwt_token(token);
-    // store.dispatch(setCurrentuser(decoded))
-} else {
-
+if (localStorage.getItem('jwtToken')) {
+    const token = localStorage.getItem('jwtToken');
+    setAuthToken(token);
+    const decoded = jwt_token(token);
+    store.dispatch(setCurrentuser(decoded));
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+        store.dispatch(logoutUser());
+        window.location.href="/login"
+    }
 }
 
 function App() {
