@@ -28,11 +28,11 @@ class Navbar extends Component {
         const authLink = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <a className="nav-link" href="#" onClick={this.onLogoutClick.bind(this)}>
+                    <a className="nav-link" href="#logout" onClick={this.onLogoutClick.bind(this)}>
                         <img src={user.avatar}
                              className={'rounded-circle'}
                              title={'You must have Gravatar connected to your email to display image'}
-                             style={{'height': "25px", 'width': "25px",'margin-right':"5px"}} alt={""}/>
+                             style={{'height': "25px", 'width': "25px",'marginRight':"5px"}} alt={""}/>
                     Logout
                     </a>
                 </li>
