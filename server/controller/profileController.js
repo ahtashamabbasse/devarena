@@ -90,8 +90,8 @@ class ProfileController {
                     Profile.findOne({handle: req.body.handle})
                         .then(profile => {
                             if (profile) {
-                                error.handle = "Handle is already exist";
-                                res.status(400).json(error)
+                                errors.handle = "Handle is already exist";
+                                res.status(400).json(errors)
                             }
                             new Profile(profileFields)
                                 .save()
