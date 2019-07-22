@@ -23,11 +23,14 @@ class ProfileController {
         Profile.findOne({user: req.user.id})
             .populate('user', ['name', 'avatar'])
             .then(profile => {
+                console.log(profile);
                 if (!profile) {
                     errors.noprofile = "No Profile Found";
                     res.status(404).json(errors)
+                } else {
+                    res.status(200).json(profile)
                 }
-                res.status(200).json(profile)
+
             })
             .catch(err => {
                 res.status(500).json(err)
