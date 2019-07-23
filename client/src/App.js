@@ -16,6 +16,7 @@ import Login from "./components/auth/login";
 import Dashboard from "./components/dashboard/dashboard";
 import {clearProfile} from "./actions/profileAction";
 import PrivateRoute from "./components/common/PrivateRoute";
+import CreateProfile from "./components/create-profile/CreateProfile";
 
 
 if (localStorage.getItem('jwtToken')) {
@@ -45,6 +46,8 @@ function App() {
                             <Route exact path={'/login'} component={Login}/>
                             <Switch>
                                 <PrivateRoute exact path={'/dashboard'} component={Dashboard}/>
+                                <PrivateRoute exact path={'/create-profile'} component={CreateProfile}/>
+
                             </Switch>
                         </div>
                         <Footer/>
