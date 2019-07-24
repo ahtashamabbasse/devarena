@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import TextField from "../common/TextFieldComponent";
+import TextField from "../common/TextField";
+import InputField from "../common/InputField";
 
 class CreateProfile extends Component {
 
