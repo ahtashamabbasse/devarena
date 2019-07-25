@@ -18,7 +18,7 @@ class CreateProfile extends Component {
             location: "",
             status: "",
             skills: "",
-            githubUsername: "",
+            githubusername: "",
             bio: "",
             twitter: "",
             facebook: "",
@@ -42,7 +42,7 @@ class CreateProfile extends Component {
 
     onChange(e) {
         e.preventDefault();
-        console.log(e.target.name,e.target.value)
+        console.log(e.target.name);
         this.setState({
             [e.target.name]: e.target.value
         })
@@ -58,7 +58,7 @@ class CreateProfile extends Component {
             bio: this.state.bio,
             location: this.state.location,
             skills: this.state.skills,
-            githubUsername: this.state.githubUsername,
+            githubusername: this.state.githubusername,
             facebook: this.state.facebook,
             linkedin: this.state.linkedin,
             instagram: this.state.instagram,
@@ -167,7 +167,7 @@ class CreateProfile extends Component {
                                 />
 
                                 <TextField
-                                    name={'Company'}
+                                    name={'company'}
                                     value={this.state.company}
                                     placeholder={"* Company"}
                                     onChange={this.onChange}
@@ -201,11 +201,11 @@ class CreateProfile extends Component {
                                     info={'Please use comma separated values HTML,CSS,node.JS,'}
                                 />
                                 <TextField
-                                    name={'Github Username'}
-                                    value={this.state.githubUsername}
+                                    name={'githubusername'}
+                                    value={this.state.githubusername}
                                     placeholder={"* Github Username"}
                                     onChange={this.onChange}
-                                    error={errors.githubUsername}
+                                    error={errors.githubusername}
                                     info={'If you want your latest 5 repo fetch  and a github link included '}
                                 />
                                 <TextArea
