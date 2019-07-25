@@ -4,6 +4,7 @@ import TextField from "../common/TextField";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import TextArea from "../common/TextArea";
+import {createProfile} from '../../actions/profileAction'
 
 class CreateProfile extends Component {
 
@@ -31,15 +32,42 @@ class CreateProfile extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
+    }
+
     onChange(e) {
         e.preventDefault();
+        console.log(e.target.name,e.target.value)
         this.setState({
             [e.target.name]: e.target.value
         })
     }
 
     onSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
+        const profileData = {
+            handle: this.state.handle,
+            status: this.state.status,
+            company: this.state.company,
+            website: this.state.website,
+            bio: this.state.bio,
+            location: this.state.location,
+            skills: this.state.skills,
+            githubUsername: this.state.githubUsername,
+            facebook: this.state.facebook,
+            linkedin: this.state.linkedin,
+            instagram: this.state.instagram,
+            youtube: this.state.youtube,
+            twitter: this.state.twitter,
+
+        };
+
+        this.props.createProfile(profileData,this.props.history)
 
     }
 
@@ -91,7 +119,6 @@ class CreateProfile extends Component {
                         error={errors.youtube}
                     />
                 </div>
-
 
 
             )
@@ -221,4 +248,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors,
 
 });
-export default connect(mapStateToProps)(CreateProfile);
+export default connect(mapStateToProps, {createProfile})(CreateProfile);
