@@ -219,6 +219,7 @@ class CreateProfile extends Component {
 
                                 <div className={'mb-3'}>
                                     <button
+                                        type={'button'}
                                         className={'btn btn-light'}
                                         onClick={() => {
                                             this.setState(prevState => ({
