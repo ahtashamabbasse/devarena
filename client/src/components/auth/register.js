@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import classnames from 'classnames'
 import {connect} from "react-redux";
 import {registerUser} from "../../actions/authAction";
 import PropsTypes from "prop-types"
-import TextField from "../common/TextFieldComponent";
+import TextField from "../common/TextField";
 
 
 const {withRouter} = require("react-router-dom");

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {loginuser} from "../../actions/authAction";
 import {connect} from "react-redux";
-import TextField from '../common/TextFieldComponent'
+import TextField from '../common/TextField'
 
 class Login extends Component {
 

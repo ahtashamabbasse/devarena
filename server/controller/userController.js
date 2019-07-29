@@ -105,7 +105,7 @@ class UserController {
                                 jwt.sign(
                                     payLoad,
                                     config.secretOrKey,
-                                    {expiresIn: 3600},
+                                    {expiresIn: 610000},
                                     (err,token) => {
                                         res.status(200).json({
                                             success:true,

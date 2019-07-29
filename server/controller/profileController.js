@@ -23,11 +23,14 @@ class ProfileController {
         Profile.findOne({user: req.user.id})
             .populate('user', ['name', 'avatar'])
             .then(profile => {
+                console.log(profile);
                 if (!profile) {
                     errors.noprofile = "No Profile Found";
                     res.status(404).json(errors)
+                } else {
+                    res.status(200).json(profile)
                 }
-                res.status(200).json(profile)
+
             })
             .catch(err => {
                 res.status(500).json(err)
@@ -90,8 +93,8 @@ class ProfileController {
                     Profile.findOne({handle: req.body.handle})
                         .then(profile => {
                             if (profile) {
-                                error.handle = "Handle is already exist";
-                                res.status(400).json(error)
+                                errors.handle = "Handle is already exist";
+                                res.status(400).json(errors)
                             }
                             new Profile(profileFields)
                                 .save()
