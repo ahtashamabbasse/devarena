@@ -1,4 +1,4 @@
-import {PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_ERRORS} from './types'
+import {PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER} from './types'
 import axios from 'axios'
 
 export const getCurrentProfile = () => dispatch => {
@@ -35,7 +35,7 @@ export const clearProfile = () => {
 
 export const createProfile = (profileData, history) => dispatch => {
 
-    axios.post("api/profile",profileData)
+    axios.post("api/profile", profileData)
         .then(res => {
             return history.push('/dashboard')
         })
@@ -46,3 +46,23 @@ export const createProfile = (profileData, history) => dispatch => {
             })
         })
 };
+
+export const onDeleteAccount = () => dispatch => {
+
+    if (window.confirm("are you sure? You cannot undo this action")) {
+        axios.delete("api/profile")
+            .then(res => {
+                return dispatch({
+                    type:SET_CURRENT_USER,
+                    payload:{}
+                })
+            })
+            .catch(err => {
+                return dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            })
+    }
+};
+
