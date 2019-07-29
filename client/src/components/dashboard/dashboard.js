@@ -25,11 +25,15 @@ class Dashboard extends Component {
             dashboardContent = <Spinner/>
         } else {
             if (Object.keys(profile).length > 0) {
-                dashboardContent = <h1>Show Profile</h1>
+                dashboardContent = (
+                    <div>
+                        <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>,</p>
+                    </div>
+                )
             } else {
                 dashboardContent=(
                     <div>
-                        <p className="lead text-muted">Welcome {user.name},</p>
+
                         <p>You have not yet setup profile Please add some info</p>
                         <Link to={'/create-profile'} className={'btn btn-info btn-lg'} >Create Profile</Link>
                     </div>
