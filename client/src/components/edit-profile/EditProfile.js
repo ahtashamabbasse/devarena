@@ -4,7 +4,8 @@ import TextField from "../common/TextField";
 import InputField from "../common/InputField";
 import SelectField from "../common/SelectField";
 import TextArea from "../common/TextArea";
-import {createProfile,getCurrentProfile} from '../../actions/profileAction'
+import {createProfile, getCurrentProfile} from '../../actions/profileAction'
+import isEmpty from "../../validations/isEmpty";
 
 class EditProfile extends Component {
 
@@ -31,6 +32,7 @@ class EditProfile extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this)
     }
+
     componentWillMount() {
         this.props.getCurrentProfile()
     }
@@ -41,23 +43,37 @@ class EditProfile extends Component {
                 errors: nextProps.errors
             })
         }
-        if (nextProps.profile.profile){
-            const {profile}=nextProps.profile;
-            console.log(profile)
+        if (nextProps.profile.profile) {
+            const {profile} = nextProps.profile;
+
+            profile.handle = !isEmpty(profile.handle) ? profile.handle : "";
+            profile.status = !isEmpty(profile.status) ? profile.status : "";
+            profile.company = !isEmpty(profile.company) ? profile.company : "";
+            profile.website = !isEmpty(profile.website) ? profile.website : "";
+            profile.location = !isEmpty(profile.location) ? profile.location : "";
+            profile.skills = !isEmpty(profile.skills) ? profile.skills : "";
+            profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : "";
+            profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
+            profile.facebook = !isEmpty(profile.facebook) ? profile.facebook : "";
+            profile.twitter = !isEmpty(profile.twitter) ? profile.twitter : "";
+            profile.linkedin = !isEmpty(profile.linkedin) ? profile.linkedin : "";
+            profile.youtube = !isEmpty(profile.youtube) ? profile.youtube : "";
+
+            console.log(profile);
             this.setState({
-                handle:profile.handle,
-                status:profile.status,
-                company:profile.company,
-                website:profile.website,
-                location:profile.location,
-                skills:profile.skills.toString(),
-                githubusername:profile.githubusername,
-                bio:profile.bio,
-                facebook:profile.facebook,
-                instagram:profile.instagram,
-                twitter:profile.twitter,
-                linkedin:profile.linkedin,
-                youtube:profile.youtube,
+                handle: profile.handle,
+                status: profile.status,
+                company: profile.company,
+                website: profile.website,
+                location: profile.location,
+                skills: profile.skills.toString(),
+                githubusername: profile.githubusername,
+                bio: profile.bio,
+                facebook: profile.facebook,
+                instagram: profile.instagram,
+                twitter: profile.twitter,
+                linkedin: profile.linkedin,
+                youtube: profile.youtube,
             })
         }
     }
@@ -89,7 +105,7 @@ class EditProfile extends Component {
 
         };
 
-        this.props.createProfile(profileData,this.props.history)
+        this.props.createProfile(profileData, this.props.history)
 
     }
 
@@ -268,4 +284,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors,
 
 });
-export default connect(mapStateToProps, {createProfile,getCurrentProfile})(EditProfile);
+export default connect(mapStateToProps, {createProfile, getCurrentProfile})(EditProfile);
