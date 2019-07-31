@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {Link, withRouter} from "react-router-dom";
 import TextField from "../common/TextField";
 import TextArea from "../common/TextArea";
-
+import {addExpericen} from '../../actions/profileAction'
 
 class AddExperience extends Component {
 
@@ -24,6 +24,13 @@ class AddExperience extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
+    }
 
     onChange(e) {
         this.setState({
@@ -42,12 +49,23 @@ class AddExperience extends Component {
     }
 
     onSubmit(e) {
+        e.preventDefault()
+        const newExperience={
+            company: this.state.company,
+            title: this.state.title,
+            description: this.state.description,
+            location: this.state.location,
+            from: this.state.from,
+            to: this.state.to,
+            current: this.state.current,
+        }
+        this.props.addExpericen(newExperience,this.props.history)
 
     }
 
 
     render() {
-        const {errors} = this.state
+        const {errors} = this.state;
         return (
             <div className={'add-experience'}>
                 <div className="container">
@@ -140,4 +158,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile,
     errors: state.errors,
 });
-export default connect(mapStateToProps)(withRouter(AddExperience));
+export default connect(mapStateToProps,{addExpericen:addExpericen})(withRouter(AddExperience));

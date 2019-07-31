@@ -47,14 +47,28 @@ export const createProfile = (profileData, history) => dispatch => {
         })
 };
 
+export const addExpericen = (expData, history) => dispatch => {
+
+    axios.post("api/profile/experience", expData)
+        .then(res => {
+            return history.push('/dashboard')
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        })
+};
+
 export const onDeleteAccount = () => dispatch => {
 
     if (window.confirm("are you sure? You cannot undo this action")) {
         axios.delete("api/profile")
             .then(res => {
                 return dispatch({
-                    type:SET_CURRENT_USER,
-                    payload:{}
+                    type: SET_CURRENT_USER,
+                    payload: {}
                 })
             })
             .catch(err => {
