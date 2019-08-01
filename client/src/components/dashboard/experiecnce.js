@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
-import {getCurrentProfile, onDeleteAccount} from "../../actions/profileAction";
-import Spinner from "../common/spinner";
-import {Link, withRouter} from "react-router-dom";
-import ProfileAction from "./profileAction";
+import {deleteExperience} from "../../actions/profileAction";
 import Moment from "react-moment";
 
 class Experience extends Component {
+    onDelete(id) {
+        this.props.deleteExperience(id)
+    }
 
     render() {
         const experience = this.props.experience.map(exp => (
@@ -19,7 +19,7 @@ class Experience extends Component {
                         {exp.to === null ? ('Now') : <Moment format={'YYYY/MM/DD'}>{exp.to}</Moment>}
                     </td>
                     <td>
-                        <button className={'btn btn-danger'}>Delete</button>
+                        <button onClick={this.onDelete.bind(this, exp._id)} className={'btn btn-danger'}>Delete</button>
                     </td>
                 </tr>
             )
@@ -50,4 +50,4 @@ const mapStateToProps = (state) => ({
     profile: state.profile,
     errors: state.errors
 });
-export default connect(mapStateToProps, {})(withRouter(Experience));
+export default connect(mapStateToProps, {deleteExperience})(Experience);
