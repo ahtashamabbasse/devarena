@@ -112,3 +112,22 @@ export const deleteExperience = (id) => dispatch => {
     }
 };
 
+export const deleteEducation = (id) => dispatch => {
+
+    if (window.confirm("are you sure? You cannot undo this action")) {
+        axios.delete("api/profile/education/"+id)
+            .then(res => {
+                return dispatch({
+                    type: GET_PROFILE,
+                    payload: res.data
+                })
+            })
+            .catch(err => {
+                return dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            })
+    }
+};
+
