@@ -3,7 +3,9 @@ import {connect} from "react-redux";
 import {getCurrentProfile,onDeleteAccount} from "../../actions/profileAction";
 import Spinner from "../common/spinner";
 import {Link} from "react-router-dom";
-import ProfileAction from "./profileAction";
+import ProfileAction from "./ProfileAction";
+import Experience from "./Experiecnce";
+import Education from "./Education";
 
 class Dashboard extends Component {
     componentDidMount() {
@@ -25,7 +27,7 @@ class Dashboard extends Component {
     render() {
         const {user} = this.props.auth;
         const {profile, loading} = this.props.profile;
-        let dashboardContent = ''
+        let dashboardContent = '';
         if (profile === null || loading) {
             dashboardContent = <Spinner/>
         } else {
@@ -34,8 +36,10 @@ class Dashboard extends Component {
                     <div>
                         <p className="lead text-muted">Welcome <Link to={`/profile/${profile.handle}`}>{user.name}</Link>,</p>
                         <ProfileAction/>
-                        <div style={{marginBottom:"60px"}}></div>
-                        <button onClick={this.onDeleteAccount.bind(this)} className={'btn btn-danger'}>Delete</button>
+                        <Experience experience={profile.experience} />
+                        <Education education={profile.education} />
+                        <div style={{marginBottom: "60px"}}/>
+                        <button onClick={this.onDeleteAccount.bind(this)} className={'btn btn-danger'}>Delete my account</button>
 
                     </div>
 
