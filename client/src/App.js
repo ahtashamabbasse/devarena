@@ -13,7 +13,7 @@ import store from "./store";
 
 import Register from "./components/auth/register";
 import Login from "./components/auth/login";
-import Dashboard from "./components/dashboard/dashboard";
+import Dashboard from "./components/dashboard/Dashboard";
 import {clearProfile} from "./actions/profileAction";
 import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";

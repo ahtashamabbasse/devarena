@@ -3,9 +3,9 @@ import {connect} from "react-redux";
 import {getCurrentProfile,onDeleteAccount} from "../../actions/profileAction";
 import Spinner from "../common/spinner";
 import {Link} from "react-router-dom";
-import ProfileAction from "./profileAction";
-import Experience from "./experiecnce";
-import Education from "./education";
+import ProfileAction from "./ProfileAction";
+import Experience from "./Experiecnce";
+import Education from "./Education";
 
 class Dashboard extends Component {
     componentDidMount() {
