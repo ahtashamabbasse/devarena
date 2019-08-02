@@ -15,21 +15,23 @@ const InputField = ({
                         disabled
                     }) => {
     return (
-        <div className="input-group mb-3">
-            <div className="input-group-prepend">
+        <div>
+            <div className="input-group mb-3">
+                <div className="input-group-prepend">
                 <span className="input-group-text">
                     <i className={icon}/>
                 </span>
+                </div>
+
+                <input type={type}
+                       className={classnames("form-control form-control-lg ", {'is-invalid': error})}
+                       value={value}
+                       onChange={onChange}
+                       disabled={disabled}
+                       placeholder={placeholder} name={name}/>
             </div>
-
-            <input type={type}
-                   className={classnames("form-control form-control-lg ", {'is-invalid': error})}
-                   value={value}
-                   onChange={onChange}
-                   disabled={disabled}
-                   placeholder={placeholder} name={name}/>
             {info && <small className="form-text text-muted">{info}</small>}
-
+            {error && <small className="form-text text-danger">{error}</small>}
         </div>
     );
 };
