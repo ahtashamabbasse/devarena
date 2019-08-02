@@ -45,6 +45,7 @@ class EditProfile extends Component {
         }
         if (nextProps.profile.profile) {
             const {profile} = nextProps.profile;
+            console.log(profile);
 
             profile.handle = !isEmpty(profile.handle) ? profile.handle : "";
             profile.status = !isEmpty(profile.status) ? profile.status : "";
@@ -54,10 +55,11 @@ class EditProfile extends Component {
             profile.skills = !isEmpty(profile.skills) ? profile.skills : "";
             profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : "";
             profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
-            profile.facebook = !isEmpty(profile.facebook) ? profile.facebook : "";
-            profile.twitter = !isEmpty(profile.twitter) ? profile.twitter : "";
-            profile.linkedin = !isEmpty(profile.linkedin) ? profile.linkedin : "";
-            profile.youtube = !isEmpty(profile.youtube) ? profile.youtube : "";
+            profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : "";
+            profile.twitter = !isEmpty(profile.social.twitter) ? profile.social.twitter : "";
+            profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : "";
+            profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : "";
+            profile.instagram = !isEmpty(profile.social.instagram) ? profile.social.instagram : "";
 
             console.log(profile);
             this.setState({
