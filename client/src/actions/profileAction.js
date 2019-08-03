@@ -1,4 +1,4 @@
-import {PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER} from './types'
+import {PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER, GET_PROFILES} from './types'
 import axios from 'axios'
 
 export const getCurrentProfile = () => dispatch => {
@@ -17,6 +17,26 @@ export const getCurrentProfile = () => dispatch => {
             return dispatch({
                 type: GET_PROFILE,
                 payload: {}
+            })
+        })
+};
+
+export const getProfiles = () => dispatch => {
+
+    dispatch(setProfileLoading());
+
+    axios.get('/api/profile/all',)
+        .then(res => {
+            dispatch(setProfileLoading());
+            return dispatch({
+                type: GET_PROFILES,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: null
             })
         })
 };
