@@ -20,7 +20,7 @@ import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/profile/EditProfile";
 import AddExperience from "./components/experience/AddExperience";
 import AddEducation from "./components/education/AddEducation";
-import Profile from "./components/profile/Profile";
+import Profile from "./components/profile/Profiles";
 
 
 if (localStorage.getItem('jwtToken')) {
