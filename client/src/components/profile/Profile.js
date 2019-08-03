@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {connect} from "react-redux";
 
 import {getProfileByHandle} from '../../actions/profileAction'
+import ProfileHeader from "./ProfileHeader";
+import ProfileAbout from "./ProfileAbout";
+import ProfileGithub from "./ProfileGithub";
+import ProfileBody from "./ProfileBody";
 
 class Profile extends Component {
     componentDidMount() {
-        console.log(this.props);
         if (this.props.match.params.handle) {
             console.log("hitting");
             let handle = this.props.match.params.handle;
@@ -19,6 +22,12 @@ class Profile extends Component {
             <div>
 
 
+                <ProfileHeader/>
+                <ProfileAbout/>
+                <ProfileBody/>
+                <ProfileGithub/>
+
+
             </div>
         );
     }
@@ -26,6 +35,6 @@ class Profile extends Component {
 
 const mapStateToProps = (state) => ({
     profile: state.profile
-})
+});
 
 export default connect(mapStateToProps, {getProfileByHandle})(Profile);
