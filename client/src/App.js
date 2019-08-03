@@ -17,10 +17,11 @@ import Dashboard from "./components/dashboard/Dashboard";
 import {clearProfile} from "./actions/profileAction";
 import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";
-import EditProfile from "./components/profile/EditProfile";
+import EditProfile from "./components/edit-profile/EditProfile";
 import AddExperience from "./components/experience/AddExperience";
 import AddEducation from "./components/education/AddEducation";
-import Profile from "./components/profile/Profiles";
+import Profiles from "./components/profiles/Profiles";
+import Profile from "./components/profile/Profile";
 
 
 if (localStorage.getItem('jwtToken')) {
@@ -54,7 +55,8 @@ function App() {
                                 <PrivateRoute exact path={'/edit-profile'} component={EditProfile}/>
                                 <PrivateRoute exact path={'/add-experience'} component={AddExperience}/>
                                 <PrivateRoute exact path={'/add-education'} component={AddEducation}/>
-                                <PrivateRoute exact path={'/profiles'} component={Profile}/>
+                                <PrivateRoute exact path={'/profiles'} component={Profiles}/>
+                                <PrivateRoute exact path={'/profile/:handle'} component={Profile}/>
 
                             </Switch>
                         </div>

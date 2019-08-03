@@ -151,3 +151,20 @@ export const deleteEducation = (id) => dispatch => {
     }
 };
 
+export const getProfileByHandle = (handle) => dispatch => {
+
+    axios.get('/api/profile/handle/'+handle)
+        .then(res => {
+            console.log(res);
+            return dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        })
+};
