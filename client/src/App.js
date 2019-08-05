@@ -60,7 +60,8 @@ function App() {
                                 <PrivateRoute exact path={'/profile/:handle'} component={Profile}/>
                             </Switch>
                         </div>
-                        <Route path={'/not-found'} component={NotFound}/>
+                        {/*<Route path={'/not-found'} component={NotFound}/>*/}
+                        <Route path='*' component={NotFound}/>
                         <Footer/>
                     </div>
 
