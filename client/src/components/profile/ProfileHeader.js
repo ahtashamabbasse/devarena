@@ -4,7 +4,6 @@ import isEmpty from "../../validations/isEmpty";
 class ProfileHeader extends Component {
     render() {
         const profile = this.props.profile;
-        console.log(profile.social);
         return (
             <div>
                 <div className="row">
