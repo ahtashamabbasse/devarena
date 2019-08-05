@@ -5,9 +5,9 @@ class ProfileAbout extends Component {
     render() {
         const profile = this.props.profile;
 
-        const skills = profile.skills.map((skill) => {
+        const skills = profile.skills.map((skill,index) => {
             return (
-                <div className="p-3">
+                <div key={index} className="p-3">
                     <i className="fa fa-check"/> {skill}
                 </div>
             )
