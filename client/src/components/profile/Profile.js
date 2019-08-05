@@ -23,7 +23,6 @@ class Profile extends Component {
         const {profile, isLoading} = this.props.profile;
         let profileContent;
         if (profile === null || isLoading) {
-            console.log('hitting');
             profileContent = (
                 <Spinner/>
             )
@@ -40,7 +39,11 @@ class Profile extends Component {
                     <ProfileHeader profile={profile}/>
                     <ProfileAbout profile={profile}/>
                     <ProfileBody education={profile.education} experience={profile.experience}/>
-                    <ProfileGithub profile={profile}/>
+                    {
+                        profile.githubusername?(
+                        <ProfileGithub userName={profile.githubusername}/>
+                    ):null}
+
                 </div>
             )
 

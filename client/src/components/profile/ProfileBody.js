@@ -4,8 +4,6 @@ import Moment from "react-moment";
 class ProfileBody extends Component {
     render() {
         const {education, experience} = this.props;
-        // console.log(education);
-        console.log(experience[0].from);
 
         const expItem = experience.map((exp, index) =>
             (<li key={index} className="list-group-item">
@@ -37,21 +35,22 @@ class ProfileBody extends Component {
             <div className="row">
                 <div className="col-md-6">
                     <h3 className="text-center text-info">Experience</h3>
-                    {expItem.length>0?(
+                    {expItem.length > 0 ? (
                         <ul className="list-group">
                             {expItem}
                         </ul>
-                    ):(
+                    ) : (
                         <p className={'text-center'}>No Experience Listed</p>
                     )}
                 </div>
                 <div className="col-md-6">
                     <h3 className="text-center text-info">Education</h3>
-                    {eduItem.length>0?(
+                    {
+                        eduItem.length > 0 ? (
                         <ul className="list-group">
                             {eduItem}
                         </ul>
-                    ):(
+                        ) : (
                         <p className={'text-center'}>No Education Listed</p>
                     )}
                 </div>
