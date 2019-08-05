@@ -152,7 +152,7 @@ export const deleteEducation = (id) => dispatch => {
 };
 
 export const getProfileByHandle = (handle) => dispatch => {
-
+    dispatch(setProfileLoading());
     axios.get('/api/profile/handle/'+handle)
         .then(res => {
             return dispatch({
@@ -162,8 +162,8 @@ export const getProfileByHandle = (handle) => dispatch => {
         })
         .catch(err => {
             return dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
+                type: GET_PROFILE,
+                payload: null
             })
         })
 };

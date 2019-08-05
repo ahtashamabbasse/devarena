@@ -10,6 +10,13 @@ import Spinner from "../common/spinner";
 import {Link} from "react-router-dom";
 
 class Profile extends Component {
+    
+    componentWillReceiveProps(nextProps, nextContext) {
+        if (nextProps.profile.profile===null && this.props.profile.loading){
+            this.props.history.push('/not-found')
+        }
+    }
+
     componentDidMount() {
         if (this.props.match.params.handle) {
             console.log("hitting");

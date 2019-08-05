@@ -22,6 +22,7 @@ import AddExperience from "./components/experience/AddExperience";
 import AddEducation from "./components/education/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
+import NotFound from "./components/not-found";
 
 
 if (localStorage.getItem('jwtToken')) {
@@ -57,11 +58,12 @@ function App() {
                                 <PrivateRoute exact path={'/add-education'} component={AddEducation}/>
                                 <PrivateRoute exact path={'/profiles'} component={Profiles}/>
                                 <PrivateRoute exact path={'/profile/:handle'} component={Profile}/>
-
                             </Switch>
                         </div>
+                        <Route path={'/not-found'} component={NotFound}/>
                         <Footer/>
                     </div>
+
                 </Router>
             </Provider>
         </div>
