@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from "react-router-dom";
 import Spinner from "../common/spinner";
 
 class ProfileGithub extends Component {
@@ -32,7 +31,6 @@ class ProfileGithub extends Component {
 
     render() {
         const {repos} = this.state;
-        console.log(repos);
         let repoItems;
         if (repos.length === 0) {
             repoItems = <Spinner/>
@@ -43,7 +41,7 @@ class ProfileGithub extends Component {
                     <div className="row">
                         <div className="col-md-6">
                             <h4>
-                                <a href={repo.html_url} className="text-info" target="_blank"> {repo.name}</a>
+                                <a href={repo.html_url} className="text-info" rel="noopener noreferrer" target="_blank"> {repo.name}</a>
                             </h4>
                             <p>{repo.description}</p>
                         </div>

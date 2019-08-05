@@ -19,7 +19,6 @@ class Profile extends Component {
 
     componentDidMount() {
         if (this.props.match.params.handle) {
-            console.log("hitting");
             let handle = this.props.match.params.handle;
             this.props.getProfileByHandle(handle)
         }
