@@ -1,4 +1,4 @@
-
+import {GET_POST, GET_POSTS} from "../actions/types";
 
 const initialState = {
     post: null,
@@ -6,3 +6,22 @@ const initialState = {
     loading: false,
 
 };
+
+export default function (state=initialState,action) {
+    switch (action.type) {
+        case GET_POST:
+            return{
+                ...state,
+                post: action.payload,
+                loading: false
+            };
+        case GET_POSTS:
+            return{
+                ...state,
+                posts: action.payload,
+                loading: false
+            };
+        default:
+            return state
+    }
+}
