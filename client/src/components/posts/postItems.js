@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
 import {Link} from "react-router-dom";
+import {deletePost} from '../../actions/postAction'
 
 class PostItems extends Component {
     onDeletePost(id) {
         console.log("post id ", id)
+        this.props.deletePost(id)
     }
 
     render() {
@@ -50,6 +52,6 @@ class PostItems extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    auth: state.auth
+    auth: state.auth,
 });
-export default connect(mapStateToProps)(PostItems);
+export default connect(mapStateToProps,{deletePost})(PostItems);
