@@ -33,11 +33,13 @@ class PostForm extends Component {
             text: this.state.text
         };
         this.props.addPost(newPost)
+        this.setState({
+            text:''
+        })
     }
 
     render() {
         const {errors} = this.state;
-        console.log(this.state)
         return (
             <div>
                 <div className="post-form mb-3">
