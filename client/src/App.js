@@ -23,6 +23,7 @@ import AddEducation from "./components/education/AddEducation";
 import Profiles from "./components/profiles/Profiles";
 import Profile from "./components/profile/Profile";
 import NotFound from "./components/not-found";
+import Posts from "./components/posts/Posts";
 
 
 if (localStorage.getItem('jwtToken')) {
@@ -34,7 +35,6 @@ if (localStorage.getItem('jwtToken')) {
     if (decoded.exp < currentTime) {
         store.dispatch(logoutUser());
         store.dispatch(clearProfile());
-
         window.location.href = "/login"
     }
 }
@@ -58,6 +58,7 @@ function App() {
                                 <PrivateRoute exact path={'/add-education'} component={AddEducation}/>
                                 <PrivateRoute exact path={'/profiles'} component={Profiles}/>
                                 <PrivateRoute exact path={'/profile/:handle'} component={Profile}/>
+                                <PrivateRoute exact path={'/feed'} component={Posts}/>
                             </Switch>
                         </div>
                         <Route path={'/not-found'} component={NotFound}/>
