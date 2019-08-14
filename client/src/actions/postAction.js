@@ -85,6 +85,24 @@ export const removeLike = id => dispatch => {
         })
 };
 
+export const getPost = (id) => dispatch => {
+    dispatch(setPostLoader());
+    axios.get('/api/posts/'+id)
+        .then(res => {
+            dispatch({
+                type: GET_POST,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            console.log(err);
+            return dispatch({
+                type: GET_POST,
+                payload: null
+            })
+        })
+};
+
 const setPostLoader = () => {
     return {
         type: POST_LOADING

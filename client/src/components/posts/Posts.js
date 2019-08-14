@@ -3,7 +3,6 @@ import PostForm from "./PostForm";
 import {connect} from "react-redux";
 import {getPosts} from '../../actions/postAction'
 import Spinner from "../common/spinner";
-import PostItems from "./postItems";
 import PostFeed from "./PostFeed";
 
 class Posts extends Component {
@@ -25,7 +24,7 @@ class Posts extends Component {
     componentWillReceiveProps(nextProps, nextContext) {
         if (nextProps.post) {
             this.setState({
-                posts:nextProps.post.posts
+                posts: nextProps.post.posts
             })
         }
 
