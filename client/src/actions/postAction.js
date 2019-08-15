@@ -4,7 +4,7 @@ import {
     ADD_POST,
     POST_LOADING,
     DELETE_POST,
-    GET_POST, ADD_COMMENT
+    GET_POST, DELETE_COMMENT,
 } from './types'
 import axios from 'axios'
 
@@ -66,6 +66,21 @@ export const deletePost = id => dispatch => {
             dispatch({
                 type: DELETE_POST,
                 payload: id
+            })
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        })
+};
+export const deleteComment = (postId,commentId) => dispatch => {
+    axios.delete(`/api/posts/${postId}/${commentId}` )
+        .then(res => {
+            dispatch({
+                type: DELETE_COMMENT,
+                payload: commentId
             })
         })
         .catch(err => {

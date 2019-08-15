@@ -5,6 +5,7 @@ import Spinner from "../common/spinner";
 import PostItems from "../posts/postItems";
 import {Link} from "react-router-dom";
 import CommentForm from "./CommentForm";
+import CommentFeed from "./CommentFeed";
 
 class Post extends Component {
     componentDidMount() {
@@ -16,13 +17,14 @@ class Post extends Component {
 
         const {post, loading} = this.props.post;
         let postContent;
-        if (post === null || loading || Object.keys(post).length < 0) {
+        if (post === null || loading || Object.keys(post).length === 0) {
             postContent=<Spinner/>
         }else {
             postContent=(
                 <div>
                     <PostItems post={post} showAction={false} />
                     <CommentForm postId={post._id} />
+                    <CommentFeed comments={post.comments} />
                 </div>
             )
         }

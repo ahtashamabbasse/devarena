@@ -25,7 +25,6 @@ class PostItems extends Component {
 
     render() {
         const {post, auth, showAction} = this.props;
-        console.log(showAction);
         return (
             <div className="card card-body mb-3">
                 <div className="row">
