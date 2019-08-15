@@ -30,12 +30,18 @@ class Navbar extends Component {
         const authLink = (
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
+                    <Link className="nav-link" to="/feed">Feed</Link>
+                </li>
+                <li className="nav-item">
+                    <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                </li>
+                <li className="nav-item">
                     <a className="nav-link" href="#logout" onClick={this.onLogoutClick.bind(this)}>
                         <img src={user.avatar}
                              className={'rounded-circle'}
                              title={'You must have Gravatar connected to your email to display image'}
-                             style={{'height': "25px", 'width': "25px",'marginRight':"5px"}} alt={""}/>
-                    Logout
+                             style={{'height': "25px", 'width': "25px", 'marginRight': "5px"}} alt={""}/>
+                        Logout
                     </a>
                 </li>
             </ul>
@@ -45,14 +51,14 @@ class Navbar extends Component {
                 <div className="container">
                     <Link className="navbar-brand" to="/">DevArena</Link>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-                        <span className="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"/>
                     </button>
 
                     <div className="collapse navbar-collapse" id="mobile-nav">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="profiles.html"> Developers
-                                </a>
+                                <Link className="nav-link" to={'/profiles'}> Developers
+                                </Link>
                             </li>
                         </ul>
                         {isAuthorized ? authLink : guestLink}
@@ -67,4 +73,4 @@ class Navbar extends Component {
 const mapStateToProps = state => ({
     auth: state.auth
 })
-export default connect(mapStateToProps, {logoutUser,clearProfile})(Navbar);
+export default connect(mapStateToProps, {logoutUser, clearProfile})(Navbar);

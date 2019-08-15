@@ -19,7 +19,11 @@ export default function (state = initialState, action) {
             loading: false
         }
     } else if (action.type === GET_PROFILES) {
-
+        return {
+            ...state,
+            profiles: action.payload,
+            loading: false
+        }
     } else if (action.type === PROFILE_LOADING) {
         return {
             ...state,

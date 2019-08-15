@@ -1,4 +1,4 @@
-import {PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER} from './types'
+import {PROFILE_LOADING, GET_PROFILE, CLEAR_CURRENT_PROFILE, GET_ERRORS, SET_CURRENT_USER, GET_PROFILES} from './types'
 import axios from 'axios'
 
 export const getCurrentProfile = () => dispatch => {
@@ -17,6 +17,26 @@ export const getCurrentProfile = () => dispatch => {
             return dispatch({
                 type: GET_PROFILE,
                 payload: {}
+            })
+        })
+};
+
+export const getProfiles = () => dispatch => {
+
+    dispatch(setProfileLoading());
+
+    axios.get('/api/profile/all',)
+        .then(res => {
+            dispatch(setProfileLoading());
+            return dispatch({
+                type: GET_PROFILES,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: null
             })
         })
 };
@@ -47,14 +67,41 @@ export const createProfile = (profileData, history) => dispatch => {
         })
 };
 
+export const addExpericen = (expData, history) => dispatch => {
+
+    axios.post("api/profile/experience", expData)
+        .then(res => {
+            return history.push('/dashboard')
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        })
+};
+export const addEducation = (expData, history) => dispatch => {
+
+    axios.post("api/profile/education", expData)
+        .then(res => {
+            return history.push('/dashboard')
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_ERRORS,
+                payload: err.response.data
+            })
+        })
+};
+
 export const onDeleteAccount = () => dispatch => {
 
     if (window.confirm("are you sure? You cannot undo this action")) {
         axios.delete("api/profile")
             .then(res => {
                 return dispatch({
-                    type:SET_CURRENT_USER,
-                    payload:{}
+                    type: SET_CURRENT_USER,
+                    payload: {}
                 })
             })
             .catch(err => {
@@ -66,3 +113,57 @@ export const onDeleteAccount = () => dispatch => {
     }
 };
 
+export const deleteExperience = (id) => dispatch => {
+
+    if (window.confirm("are you sure? You cannot undo this action")) {
+        axios.delete("api/profile/experience/"+id)
+            .then(res => {
+                return dispatch({
+                    type: GET_PROFILE,
+                    payload: res.data
+                })
+            })
+            .catch(err => {
+                return dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            })
+    }
+};
+
+export const deleteEducation = (id) => dispatch => {
+
+    if (window.confirm("are you sure? You cannot undo this action")) {
+        axios.delete("api/profile/education/"+id)
+            .then(res => {
+                return dispatch({
+                    type: GET_PROFILE,
+                    payload: res.data
+                })
+            })
+            .catch(err => {
+                return dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                })
+            })
+    }
+};
+
+export const getProfileByHandle = (handle) => dispatch => {
+    dispatch(setProfileLoading());
+    axios.get('/api/profile/handle/'+handle)
+        .then(res => {
+            return dispatch({
+                type: GET_PROFILE,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            return dispatch({
+                type: GET_PROFILE,
+                payload: null
+            })
+        })
+};
