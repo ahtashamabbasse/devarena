@@ -55,12 +55,13 @@ class EditProfile extends Component {
             profile.skills = !isEmpty(profile.skills) ? profile.skills : "";
             profile.githubusername = !isEmpty(profile.githubusername) ? profile.githubusername : "";
             profile.bio = !isEmpty(profile.bio) ? profile.bio : "";
-            profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : "";
-            profile.twitter = !isEmpty(profile.social.twitter) ? profile.social.twitter : "";
-            profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : "";
-            profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : "";
-            profile.instagram = !isEmpty(profile.social.instagram) ? profile.social.instagram : "";
-
+            if (!isEmpty(profile.social)){
+                profile.facebook = !isEmpty(profile.social.facebook) ? profile.social.facebook : "";
+                profile.twitter = !isEmpty(profile.social.twitter) ? profile.social.twitter : "";
+                profile.linkedin = !isEmpty(profile.social.linkedin) ? profile.social.linkedin : "";
+                profile.youtube = !isEmpty(profile.social.youtube) ? profile.social.youtube : "";
+                profile.instagram = !isEmpty(profile.social.instagram) ? profile.social.instagram : "";
+            }
             console.log(profile);
             this.setState({
                 handle: profile.handle,

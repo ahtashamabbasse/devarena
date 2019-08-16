@@ -1,4 +1,6 @@
-module.exports = {
-  mongoURI: 'mongodb://localhost:27017/devarena',
-  secretOrKey: 'secret'
-};
+require('dotenv').config()
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'production')
+    module.exports = require('./keys_prod');
+else if (process.env.NODE_ENV === 'development')
+    module.exports = require('./keys_dev');
