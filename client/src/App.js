@@ -48,7 +48,7 @@ function App() {
                     <div className={'app'}>
                         <Navbar/>
                         <Route exact path={'/'} component={Landing}/>
-                        <div className="container">
+                        <div style={{minHeight:'90vh'}} className="container">
                             <Route exact path={'/register'} component={Register}/>
                             <Route exact path={'/login'} component={Login}/>
                             <Switch>
