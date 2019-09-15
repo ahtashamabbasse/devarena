@@ -1,7 +1,7 @@
 {
-  "name": "devarena",
+  "name": "devArena",
   "version": "1.0.0",
-  "description": "",
+  "description": "devarena A plateform for developers to connect, They can create their portfolio by adding experience, education, skills and other important information of their professional career. The Developer can create posts in forum and like/dislike and comment on others' posts. Integrate 3rd party Github API to exhibit their laterst 5 |Github repos in their profile In stack plate used Node.Js, Express, MongoDB, ReactJs and Redux",
   "main": "index.js",
   "scripts": {
     "start": "cd server && npm start",
