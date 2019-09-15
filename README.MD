@@ -32,16 +32,26 @@
 </p>
 
 #### Features
-- Authentication
-- Profile Setup
-- Link Social Accounts
-- Manage Education
-- Manage Experience
-- Dashboard
-- Forum
-- Utilize Github API
-- Best practices of developing react application implemented.
-- Responsive design
+  :white_check_mark:  Authentication
+  
+  :white_check_mark: Profile Setup
+  
+  :white_check_mark: Link Social Accounts
+  
+  :white_check_mark: Manage Education
+  
+  :white_check_mark: Manage Experience
+  
+  :white_check_mark: Dashboard
+  
+  :white_check_mark: Forum
+  
+  :white_check_mark: Utilize Github API
+  
+  :white_check_mark: Best practices of developing react application implemented.
+  
+  :white_check_mark: Responsive design
+
 
 
 
