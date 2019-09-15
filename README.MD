@@ -48,6 +48,8 @@
   
   :white_check_mark: Utilize Github API
   
+  :white_check_mark: Integreate Gravatar API
+  
   :white_check_mark: Best practices of developing react application implemented.
   
   :white_check_mark: Responsive design
