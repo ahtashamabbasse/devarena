@@ -10,7 +10,8 @@ describe('User Authentication', () => {
             .send({
                 name: 'David',
                 email: 'abc@gmail.com',
-                password:'123456'
+                password:'123456',
+                cpassword:'123456'
             });
         expect(res.statusCode).toEqual(201)
         expect(res.body).toHaveProperty('post')
