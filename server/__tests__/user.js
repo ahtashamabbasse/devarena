@@ -13,8 +13,14 @@ describe('User Authentication', () => {
                 password:'123456',
                 cpassword:'123456'
             });
-        expect(res.statusCode).toEqual(201)
-        expect(res.body).toHaveProperty('post')
+        expect(res.statusCode).toEqual(200)
+
+
+
     })
 
 })
+
+// it('should ', function () {
+//     expect(true).toBe(true)
+// });

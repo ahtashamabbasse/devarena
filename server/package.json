@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "test": "jest",
-    "pretest": "cross-env NODE_ENV=staging jest --testTimeout=10000"
+    "pretest": "cross-env NODE_ENV=staging"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -27,6 +27,9 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "setupFilesAfterEnv": [
+      "./jest.setup.js"
+    ],
     "coveragePathIgnorePatterns": [
       "/node_modules/"
     ]
