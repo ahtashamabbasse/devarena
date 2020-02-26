@@ -3,7 +3,6 @@ const isEmpty = require('./isEmpty');
 
 module.exports = function validateRegisterInput(data) {
     let errors = {};
-    console.log(data.name);
 
     data.name = !isEmpty(data.name) ? data.name : "";
     data.email = !isEmpty(data.email) ? data.email : "";
@@ -26,15 +25,16 @@ module.exports = function validateRegisterInput(data) {
     if (validator.isEmpty(data.email)) {
         errors.email = "Email field is required"
     }
+    if (!validator.equals(data.password, data.cpassword)) {
+        errors.password = "Password should be matched"
+    }
     if (validator.isEmpty(data.password)) {
         errors.password = "Password field is required"
     }
     if (validator.isEmpty(data.cpassword)) {
         errors.cpassword = "Confirm Password field is required"
     }
-    if (!validator.equals(data.password, data.cpassword)) {
-        errors.password = "Password should be matched"
-    }
+
 
 
     return {
