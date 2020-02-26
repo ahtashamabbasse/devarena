@@ -3,6 +3,19 @@ const app = require('../app');
 
 
 describe('User Authentication', () => {
+    it('Name should be between 2 - 30', async () => {
+        const res = await request(app)
+            .post('/api/users/register')
+            .send({
+                name: 'D',
+                email:'abcd@gmail.com',
+                password:'123456',
+                cpassword:'123456'
+            });
+        expect(res.statusCode).toEqual(400);
+        expect(res.body).hasOwnProperty('name');
+        expect(res.body.name).toEqual("Name must be between 2 and 30 character")
+    })
     it('Missing email value ', async () => {
         const res = await request(app)
             .post('/api/users/register')
@@ -39,7 +52,6 @@ describe('User Authentication', () => {
                 cpassword:'123456'
             });
         expect(res.statusCode).toEqual(400);
-        console.log(res.body);
         expect(res.body).hasOwnProperty('password');
         expect(res.body.password).toEqual("Password should be matched")
     })
