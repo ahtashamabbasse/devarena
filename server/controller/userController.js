@@ -42,7 +42,7 @@ class UserController {
 
         User.findOne({email: req.body.email}).then(user => {
             if (user) {
-                errors.email="Email is already exist";
+                errors.email="Email is already exist.";
                 return res.status(400).json(errors);
             } else {
                 const avatar = gravatar.url(req.body.email, {
@@ -93,7 +93,7 @@ class UserController {
         User.findOne({email})
             .then(user => {
                 if (!user) {
-                    errors.email= 'Emails is not Exist';
+                    errors.email= 'Email is not exist.';
                     res.status(404).json(errors);
                 } else {
                     bcrypt.compare(password, user.password)
@@ -114,7 +114,7 @@ class UserController {
                                     }
                                 );
                             } else {
-                                errors.password="Password is not correct";
+                                errors.password="Password is not correct.";
                                 res.status(400).json(errors)
                             }
                         })
