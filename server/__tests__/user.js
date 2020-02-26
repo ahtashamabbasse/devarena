@@ -143,6 +143,19 @@ describe('User Login', () => {
         expect(res.body.password).toBe('Password must be at least 6 character.');
     });
 
+    it('Password is not correct', async () => {
+        const res = await request(app)
+            .post('/api/users/login')
+            .send({
+                email: 'abc@gmail.com',
+                password: '1111111',
+            });
+        console.log(res.body)
+        expect(res.statusCode).toEqual(400);
+        expect(res.body).hasOwnProperty('password');
+        expect(res.body.password).toBe('Password is not correct.');
+    });
+
 
     it('Login user', async () => {
         const res = await request(app)
